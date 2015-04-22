@@ -61,6 +61,8 @@
       border-color: #bb2222;
       border-width: 1px 1px 1px 1px;
       border-radius: 4px 4px 4px 4px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
     .status {
       font-style: italic;
@@ -86,7 +88,7 @@
       <form>
         <div class="emailInputRow">
           <input class="emailInput" id="emailInput" type="text" name="email" placeholder="e-mail address" />
-          <input class="emailSubmitButton" id="emailSubmitButton" type="submit" value=" e-mail me " />
+          <input class="emailSubmitButton" id="emailSubmitButton" type="submit" value="sign up" />
         </div>
         <div class="status" id="status"></div>
       </form>
@@ -102,6 +104,9 @@
     $("#emailSubmitButton").click(function (event) {
       event.preventDefault();
       var email = $("#emailInput").val().trim();
+      if (!email) {
+        return false;
+      }
       $.ajax({
         type: "POST",
         url: "submit_email.php",
