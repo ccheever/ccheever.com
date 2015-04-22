@@ -99,10 +99,9 @@
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script>
   $(document).ready(function () {
-    $("#emailSubmitButton").click(function () {
-      //var email = $("emailInput").val().trim();
-      console.log("email=", email);
-      return false;
+    $("#emailSubmitButton").click(function (event) {
+      event.preventDefault();
+      var email = $("#emailInput").val().trim();
       $.ajax({
         type: "POST",
         url: "submit_email.php",
@@ -111,7 +110,9 @@
         },
         dataType: "json",
         success: function () {
-          $("#status").html("Success.");
+          $("#status").text("Success. Added " + email + " to the list.");
+          $("#emailSubmitButton").prop("disabled", false);
+          $("#emailInput").val("");
         },
         error: function () {
           $("#status").html("<span class='error'>Failed :( <small>Try again later.</small></span>");
